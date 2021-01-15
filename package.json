@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "MERN shopping cart app with Typescript",
   "main": "server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=12.x",
+    "npm": ">=6.x"
+  },
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
