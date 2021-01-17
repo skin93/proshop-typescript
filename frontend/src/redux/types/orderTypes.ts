@@ -114,7 +114,7 @@ export interface IOrderListMyRequest {
 
 export interface IOrderListMySuccess {
   type: typeof OrderActionTypes.ORDER_LIST_MY_SUCCESS
-  payload: IOrder
+  payload: IOrder[]
 }
 
 export interface IOrderListMyFail {
