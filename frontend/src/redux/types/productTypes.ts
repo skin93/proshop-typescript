@@ -97,6 +97,7 @@ export interface IProductDeleteSuccess {
 
 export interface IProductDeleteFail {
   type: ProductActionTypes.PRODUCT_DELETE_FAIL
+  payload: string
 }
 
 export interface IProductCreateRequest {
@@ -114,7 +115,7 @@ export interface IProductCreateFail {
 }
 
 export interface IProductCreateReset {
-  type: ProductActionTypes.PRODUCT_CREATE_REQUEST
+  type: ProductActionTypes.PRODUCT_CREATE_RESET
 }
 
 export interface IProductUpdateRequest {
@@ -230,7 +231,7 @@ export interface IProductUpdateState {
   product: IProduct | null
 }
 
-export interface IProductReviewState {
+export interface IProductCreateReviewState {
   loading: boolean
   success: boolean
   error: string
@@ -238,6 +239,6 @@ export interface IProductReviewState {
 
 export interface IProductTopState {
   loading: boolean
-  success: boolean
+  products: IProduct[]
   error: string
 }
