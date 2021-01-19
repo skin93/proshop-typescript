@@ -15,8 +15,8 @@ const Paginate: FC<IProps> = ({
   isAdmin = false,
   keyword = ''
 }) => {
-  return (
-    pages > 1 && (
+  if (pages > 1) {
+    return (
       <Pagination>
         {[...Array(pages).keys()].map((x) => (
           <LinkContainer
@@ -34,7 +34,9 @@ const Paginate: FC<IProps> = ({
         ))}
       </Pagination>
     )
-  )
+  } else {
+    return null
+  }
 }
 
 export default Paginate
