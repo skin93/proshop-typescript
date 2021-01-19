@@ -11,7 +11,11 @@ import {
   payOrder,
   deliverOrder
 } from '../redux/actions/orderActions'
-import { IPaymentResult, OrderActionTypes } from '../redux/types/orderTypes'
+import {
+  IOrder,
+  IPaymentResult,
+  OrderActionTypes
+} from '../redux/types/orderTypes'
 import {
   IOrderDeliverState,
   IOrderDetailsState,
@@ -50,16 +54,17 @@ const OrderScreen: FC<RouteComponentProps<{ id: string }>> = ({
   )
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
-  const addDecimals = (num: number) => {
-    return (Math.round(num * 100) / 100).toFixed(2)
-  }
+  // const addDecimals = (num: number) => {
+  //   return (Math.round(num * 100) / 100).toFixed(2)
+  // }
 
   if (!loading && order) {
-    order.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    order.itemsPrice = order.orderItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
     )
 
-    order.taxPrice = addDecimals(Number(0.15 * order.itemsPrice))
+    order.taxPrice = Number(0.15 * order.itemsPrice)
   }
 
   useEffect(() => {
@@ -99,11 +104,28 @@ const OrderScreen: FC<RouteComponentProps<{ id: string }>> = ({
     dispatch(deliverOrder(orderId))
   }
 
+  const loadUserDetails = (order: IOrder) => {
+    if (order.user) {
+      return (
+        <div>
+          <p>
+            <strong>Name: </strong> {order.user.name}
+          </p>
+
+          <p>
+            <strong>Email: </strong>
+            <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+          </p>
+        </div>
+      )
+    }
+  }
+
   return loading ? (
     <Loader />
   ) : error ? (
     <BaseMessage variant='danger'>{error}</BaseMessage>
-  ) : (
+  ) : order ? (
     <>
       <h1>Order {order._id}</h1>
       <Row>
@@ -111,14 +133,7 @@ const OrderScreen: FC<RouteComponentProps<{ id: string }>> = ({
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>Shipping</h2>
-              <p>
-                <strong>Name: </strong> {order.user.name}
-              </p>
-
-              <p>
-                <strong>Email: </strong>
-                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
-              </p>
+              {loadUserDetails(order)}
               <p>
                 <strong>Address: </strong>
                 {order.shippingAddress.address}, {order.shippingAddress.city},
@@ -243,7 +258,7 @@ const OrderScreen: FC<RouteComponentProps<{ id: string }>> = ({
         </Col>
       </Row>
     </>
-  )
+  ) : null
 }
 
 export default OrderScreen

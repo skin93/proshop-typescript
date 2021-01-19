@@ -33,7 +33,7 @@ export interface IPaymentResult {
   id?: string
   status?: string
   update_item?: Date
-  email_address: string
+  email_address?: string
   create_time?: Date
   payer?: {
     email_address: string
