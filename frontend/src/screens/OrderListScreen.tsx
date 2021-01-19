@@ -61,18 +61,18 @@ const OrderListScreen: FC<RouteComponentProps> = ({ history }) => {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
+                <td>{order.createdAt?.toString().substring(0, 10)}</td>
                 <td>${order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
-                    order.paidAt.substring(0, 10)
+                    order.paidAt?.toString().substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
-                    order.deliveredAt.substring(0, 10)
+                    order.deliveredAt?.toString().substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
