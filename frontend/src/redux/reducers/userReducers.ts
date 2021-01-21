@@ -183,7 +183,7 @@ export const userListReducer: Reducer<IUserListState, UserActions> = (
       return {
         ...state,
         loading: false,
-        user: action.payload
+        users: action.payload
       }
 
     case UserActionTypes.USER_LIST_FAIL:
