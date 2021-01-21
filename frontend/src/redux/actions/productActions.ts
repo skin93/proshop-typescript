@@ -223,7 +223,7 @@ export const createProductReview: ActionCreator<
 }
 
 export const listTopProducts: ActionCreator<
-  ThunkAction<Promise<void>, IApplicationState, string, ProductActions>
+  ThunkAction<Promise<void>, IApplicationState, null, ProductActions>
 > = () => async (dispatch: Dispatch) => {
   try {
     dispatch({

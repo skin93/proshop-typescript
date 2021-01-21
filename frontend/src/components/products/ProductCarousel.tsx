@@ -7,16 +7,14 @@ import BaseMessage from '../UI/BaseMessage'
 import { listTopProducts } from '../../redux/actions/productActions'
 import { IApplicationState } from '../../redux/reducers/rootReducer'
 import { ThunkDispatch } from 'redux-thunk'
-import {
-  IProductTopState,
-  ProductActions
-} from '../../redux/types/productTypes'
+import { IProductTopState } from '../../redux/types/productTypes'
+import { CartActions } from '../../redux/types/cartTypes'
 
 const ProductCarousel: FC = () => {
   const dispatch: ThunkDispatch<
     IApplicationState,
     null,
-    ProductActions
+    CartActions
   > = useDispatch()
 
   const productTopRated = useSelector<IApplicationState, IProductTopState>(
